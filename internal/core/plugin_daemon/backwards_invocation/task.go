@@ -16,7 +16,7 @@ import (
 )
 
 // returns error only if payload is not correct
-func InvokeDify(
+func InvokeMlchain(
 	declaration *plugin_entities.PluginDeclaration,
 	invoke_from access_types.PluginAccessType,
 	session *session_manager.Session,
@@ -34,7 +34,7 @@ func InvokeDify(
 	}
 
 	// prepare invocation arguments
-	requestHandle, err := prepareDifyInvocationArguments(
+	requestHandle, err := prepareMlchainInvocationArguments(
 		session,
 		writer,
 		request,
@@ -59,9 +59,9 @@ func InvokeDify(
 	// dispatch invocation task
 	routine.Submit(map[string]string{
 		"module":   "plugin_daemon",
-		"function": "InvokeDify",
+		"function": "InvokeMlchain",
 	}, func() {
-		dispatchDifyInvocationTask(requestHandle)
+		dispatchMlchainInvocationTask(requestHandle)
 		defer requestHandle.EndResponse()
 	})
 
@@ -169,7 +169,7 @@ func checkPermission(runtime *plugin_entities.PluginDeclaration, requestHandle *
 	return nil
 }
 
-func prepareDifyInvocationArguments(
+func prepareMlchainInvocationArguments(
 	session *session_manager.Session,
 	writer BackwardsInvocationWriter,
 	request map[string]any,
@@ -203,43 +203,43 @@ func prepareDifyInvocationArguments(
 var (
 	dispatchMapping = map[mlchain_invocation.InvokeType]func(handle *BackwardsInvocation){
 		mlchain_invocation.INVOKE_TYPE_TOOL: func(handle *BackwardsInvocation) {
-			genericDispatchTask(handle, executeDifyInvocationToolTask)
+			genericDispatchTask(handle, executeMlchainInvocationToolTask)
 		},
 		mlchain_invocation.INVOKE_TYPE_LLM: func(handle *BackwardsInvocation) {
-			genericDispatchTask(handle, executeDifyInvocationLLMTask)
+			genericDispatchTask(handle, executeMlchainInvocationLLMTask)
 		},
 		mlchain_invocation.INVOKE_TYPE_TEXT_EMBEDDING: func(handle *BackwardsInvocation) {
-			genericDispatchTask(handle, executeDifyInvocationTextEmbeddingTask)
+			genericDispatchTask(handle, executeMlchainInvocationTextEmbeddingTask)
 		},
 		mlchain_invocation.INVOKE_TYPE_RERANK: func(handle *BackwardsInvocation) {
-			genericDispatchTask(handle, executeDifyInvocationRerankTask)
+			genericDispatchTask(handle, executeMlchainInvocationRerankTask)
 		},
 		mlchain_invocation.INVOKE_TYPE_TTS: func(handle *BackwardsInvocation) {
-			genericDispatchTask(handle, executeDifyInvocationTTSTask)
+			genericDispatchTask(handle, executeMlchainInvocationTTSTask)
 		},
 		mlchain_invocation.INVOKE_TYPE_SPEECH2TEXT: func(handle *BackwardsInvocation) {
-			genericDispatchTask(handle, executeDifyInvocationSpeech2TextTask)
+			genericDispatchTask(handle, executeMlchainInvocationSpeech2TextTask)
 		},
 		mlchain_invocation.INVOKE_TYPE_MODERATION: func(handle *BackwardsInvocation) {
-			genericDispatchTask(handle, executeDifyInvocationModerationTask)
+			genericDispatchTask(handle, executeMlchainInvocationModerationTask)
 		},
 		mlchain_invocation.INVOKE_TYPE_APP: func(handle *BackwardsInvocation) {
-			genericDispatchTask(handle, executeDifyInvocationAppTask)
+			genericDispatchTask(handle, executeMlchainInvocationAppTask)
 		},
 		mlchain_invocation.INVOKE_TYPE_NODE_PARAMETER_EXTRACTOR: func(handle *BackwardsInvocation) {
-			genericDispatchTask(handle, executeDifyInvocationParameterExtractor)
+			genericDispatchTask(handle, executeMlchainInvocationParameterExtractor)
 		},
 		mlchain_invocation.INVOKE_TYPE_NODE_QUESTION_CLASSIFIER: func(handle *BackwardsInvocation) {
-			genericDispatchTask(handle, executeDifyInvocationQuestionClassifier)
+			genericDispatchTask(handle, executeMlchainInvocationQuestionClassifier)
 		},
 		mlchain_invocation.INVOKE_TYPE_STORAGE: func(handle *BackwardsInvocation) {
-			genericDispatchTask(handle, executeDifyInvocationStorageTask)
+			genericDispatchTask(handle, executeMlchainInvocationStorageTask)
 		},
 		mlchain_invocation.INVOKE_TYPE_SYSTEM_SUMMARY: func(handle *BackwardsInvocation) {
-			genericDispatchTask(handle, executeDifyInvocationSystemSummaryTask)
+			genericDispatchTask(handle, executeMlchainInvocationSystemSummaryTask)
 		},
 		mlchain_invocation.INVOKE_TYPE_UPLOAD_FILE: func(handle *BackwardsInvocation) {
-			genericDispatchTask(handle, executeDifyInvocationUploadFileTask)
+			genericDispatchTask(handle, executeMlchainInvocationUploadFileTask)
 		},
 	}
 )
@@ -259,7 +259,7 @@ func genericDispatchTask[T any](
 	dispatch(handle, r)
 }
 
-func dispatchDifyInvocationTask(handle *BackwardsInvocation) {
+func dispatchMlchainInvocationTask(handle *BackwardsInvocation) {
 	requestData := handle.RequestData()
 	tenantId, err := handle.TenantID()
 	if err != nil {
@@ -286,7 +286,7 @@ func dispatchDifyInvocationTask(handle *BackwardsInvocation) {
 	handle.WriteError(fmt.Errorf("unsupported invoke type: %s", handle.Type()))
 }
 
-func executeDifyInvocationToolTask(
+func executeMlchainInvocationToolTask(
 	handle *BackwardsInvocation,
 	request *mlchain_invocation.InvokeToolRequest,
 ) {
@@ -307,7 +307,7 @@ func executeDifyInvocationToolTask(
 	}
 }
 
-func executeDifyInvocationLLMTask(
+func executeMlchainInvocationLLMTask(
 	handle *BackwardsInvocation,
 	request *mlchain_invocation.InvokeLLMRequest,
 ) {
@@ -328,7 +328,7 @@ func executeDifyInvocationLLMTask(
 	}
 }
 
-func executeDifyInvocationTextEmbeddingTask(
+func executeMlchainInvocationTextEmbeddingTask(
 	handle *BackwardsInvocation,
 	request *mlchain_invocation.InvokeTextEmbeddingRequest,
 ) {
@@ -341,7 +341,7 @@ func executeDifyInvocationTextEmbeddingTask(
 	handle.WriteResponse("struct", response)
 }
 
-func executeDifyInvocationRerankTask(
+func executeMlchainInvocationRerankTask(
 	handle *BackwardsInvocation,
 	request *mlchain_invocation.InvokeRerankRequest,
 ) {
@@ -354,7 +354,7 @@ func executeDifyInvocationRerankTask(
 	handle.WriteResponse("struct", response)
 }
 
-func executeDifyInvocationTTSTask(
+func executeMlchainInvocationTTSTask(
 	handle *BackwardsInvocation,
 	request *mlchain_invocation.InvokeTTSRequest,
 ) {
@@ -375,7 +375,7 @@ func executeDifyInvocationTTSTask(
 	}
 }
 
-func executeDifyInvocationSpeech2TextTask(
+func executeMlchainInvocationSpeech2TextTask(
 	handle *BackwardsInvocation,
 	request *mlchain_invocation.InvokeSpeech2TextRequest,
 ) {
@@ -388,7 +388,7 @@ func executeDifyInvocationSpeech2TextTask(
 	handle.WriteResponse("struct", response)
 }
 
-func executeDifyInvocationModerationTask(
+func executeMlchainInvocationModerationTask(
 	handle *BackwardsInvocation,
 	request *mlchain_invocation.InvokeModerationRequest,
 ) {
@@ -401,7 +401,7 @@ func executeDifyInvocationModerationTask(
 	handle.WriteResponse("struct", response)
 }
 
-func executeDifyInvocationAppTask(
+func executeMlchainInvocationAppTask(
 	handle *BackwardsInvocation,
 	request *mlchain_invocation.InvokeAppRequest,
 ) {
@@ -430,7 +430,7 @@ func executeDifyInvocationAppTask(
 	}
 }
 
-func executeDifyInvocationParameterExtractor(
+func executeMlchainInvocationParameterExtractor(
 	handle *BackwardsInvocation,
 	request *mlchain_invocation.InvokeParameterExtractorRequest,
 ) {
@@ -443,7 +443,7 @@ func executeDifyInvocationParameterExtractor(
 	handle.WriteResponse("struct", response)
 }
 
-func executeDifyInvocationQuestionClassifier(
+func executeMlchainInvocationQuestionClassifier(
 	handle *BackwardsInvocation,
 	request *mlchain_invocation.InvokeQuestionClassifierRequest,
 ) {
@@ -456,7 +456,7 @@ func executeDifyInvocationQuestionClassifier(
 	handle.WriteResponse("struct", response)
 }
 
-func executeDifyInvocationStorageTask(
+func executeMlchainInvocationStorageTask(
 	handle *BackwardsInvocation,
 	request *mlchain_invocation.InvokeStorageRequest,
 ) {
@@ -542,7 +542,7 @@ func executeDifyInvocationStorageTask(
 	}
 }
 
-func executeDifyInvocationSystemSummaryTask(
+func executeMlchainInvocationSystemSummaryTask(
 	handle *BackwardsInvocation,
 	request *mlchain_invocation.InvokeSummaryRequest,
 ) {
@@ -555,7 +555,7 @@ func executeDifyInvocationSystemSummaryTask(
 	handle.WriteResponse("struct", response)
 }
 
-func executeDifyInvocationUploadFileTask(
+func executeMlchainInvocationUploadFileTask(
 	handle *BackwardsInvocation,
 	request *mlchain_invocation.UploadFileRequest,
 ) {

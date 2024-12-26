@@ -17,10 +17,10 @@ const (
 	BLUE   = "\033[34m"
 )
 
-const PLUGIN_GUIDE = `But before starting, you need some basic knowledge about the Plugin types, Plugin supports to extend the following abilities in Dify:
+const PLUGIN_GUIDE = `But before starting, you need some basic knowledge about the Plugin types, Plugin supports to extend the following abilities in Mlchain:
 ` + "\n" + BOLD + `- Tool` + RESET + `: ` + GREEN + `Tool Providers like Google Search, Stable Diffusion, etc. it can be used to perform a specific task.` + RESET + `
 ` + BOLD + `- Model` + RESET + `: ` + GREEN + `Model Providers like OpenAI, Anthropic, etc. you can use their models to enhance the AI capabilities.` + RESET + `
-` + BOLD + `- Endpoint` + RESET + `: ` + GREEN + `Like Service API in Dify and Ingress in Kubernetes, you can extend a http service as an endpoint and control its logics using your own code.` + RESET + `
+` + BOLD + `- Endpoint` + RESET + `: ` + GREEN + `Like Service API in Mlchain and Ingress in Kubernetes, you can extend a http service as an endpoint and control its logics using your own code.` + RESET + `
 ` + BOLD + `- Agent Strategy` + RESET + `: ` + GREEN + `You can implement your own agent strategy like Function Calling, ReAct, ToT, Cot, etc. anyway you want.` + RESET + `
 
 Based on the ability you want to extend, we have divided the Plugin into four types: ` + BOLD + `Tool` + RESET + `, ` + BOLD + `Model` + RESET + `, ` + BOLD + `Extension` + RESET + `, and ` + BOLD + `Agent Strategy` + RESET + `.

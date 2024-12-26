@@ -31,7 +31,7 @@ type BackwardsInvocation struct {
 	// NOTE: write operation will not raise errors
 	writer BackwardsInvocationWriter
 
-	// backwardsInvocation is the backwards invocation that is used to invoke dify
+	// backwardsInvocation is the backwards invocation that is used to invoke mlchain
 	backwardsInvocation mlchain_invocation.BackwardsInvocation
 }
 

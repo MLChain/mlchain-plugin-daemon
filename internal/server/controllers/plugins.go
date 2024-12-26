@@ -27,7 +27,7 @@ func GetAsset(c *gin.Context) {
 
 func UploadPlugin(app *app.Config) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		difyPkgFileHeader, err := c.FormFile("mlchain_pkg")
+		mlchainPkgFileHeader, err := c.FormFile("mlchain_pkg")
 		if err != nil {
 			c.JSON(http.StatusOK, exception.BadRequestError(err).ToResponse())
 			return
@@ -39,27 +39,27 @@ func UploadPlugin(app *app.Config) gin.HandlerFunc {
 			return
 		}
 
-		if difyPkgFileHeader.Size > app.MaxPluginPackageSize {
+		if mlchainPkgFileHeader.Size > app.MaxPluginPackageSize {
 			c.JSON(http.StatusOK, exception.BadRequestError(errors.New("File size exceeds the maximum limit")).ToResponse())
 			return
 		}
 
 		verifySignature := c.PostForm("verify_signature") == "true"
 
-		difyPkgFile, err := difyPkgFileHeader.Open()
+		mlchainPkgFile, err := mlchainPkgFileHeader.Open()
 		if err != nil {
 			c.JSON(http.StatusOK, exception.BadRequestError(err).ToResponse())
 			return
 		}
-		defer difyPkgFile.Close()
+		defer mlchainPkgFile.Close()
 
-		c.JSON(http.StatusOK, service.UploadPluginPkg(app, c, tenantId, difyPkgFile, verifySignature))
+		c.JSON(http.StatusOK, service.UploadPluginPkg(app, c, tenantId, mlchainPkgFile, verifySignature))
 	}
 }
 
 func UploadBundle(app *app.Config) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		difyBundleFileHeader, err := c.FormFile("mlchain_bundle")
+		mlchainBundleFileHeader, err := c.FormFile("mlchain_bundle")
 		if err != nil {
 			c.JSON(http.StatusOK, exception.BadRequestError(err).ToResponse())
 			return
@@ -71,21 +71,21 @@ func UploadBundle(app *app.Config) gin.HandlerFunc {
 			return
 		}
 
-		if difyBundleFileHeader.Size > app.MaxBundlePackageSize {
+		if mlchainBundleFileHeader.Size > app.MaxBundlePackageSize {
 			c.JSON(http.StatusOK, exception.BadRequestError(errors.New("File size exceeds the maximum limit")).ToResponse())
 			return
 		}
 
 		verifySignature := c.PostForm("verify_signature") == "true"
 
-		difyBundleFile, err := difyBundleFileHeader.Open()
+		mlchainBundleFile, err := mlchainBundleFileHeader.Open()
 		if err != nil {
 			c.JSON(http.StatusOK, exception.BadRequestError(err).ToResponse())
 			return
 		}
-		defer difyBundleFile.Close()
+		defer mlchainBundleFile.Close()
 
-		c.JSON(http.StatusOK, service.UploadPluginBundle(app, c, tenantId, difyBundleFile, verifySignature))
+		c.JSON(http.StatusOK, service.UploadPluginBundle(app, c, tenantId, mlchainBundleFile, verifySignature))
 	}
 }
 

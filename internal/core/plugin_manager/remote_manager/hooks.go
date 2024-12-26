@@ -24,7 +24,7 @@ var (
 	_mode pluginRuntimeMode
 )
 
-type DifyServer struct {
+type MlchainServer struct {
 	gnet.BuiltinEventEngine
 
 	engine gnet.Engine
@@ -53,12 +53,12 @@ type DifyServer struct {
 	currentConn int32
 }
 
-func (s *DifyServer) OnBoot(c gnet.Engine) (action gnet.Action) {
+func (s *MlchainServer) OnBoot(c gnet.Engine) (action gnet.Action) {
 	s.engine = c
 	return gnet.None
 }
 
-func (s *DifyServer) OnOpen(c gnet.Conn) (out []byte, action gnet.Action) {
+func (s *MlchainServer) OnOpen(c gnet.Conn) (out []byte, action gnet.Action) {
 	// new plugin connected
 	c.SetContext(&codec{})
 	runtime := &RemotePluginRuntime{
@@ -102,7 +102,7 @@ func (s *DifyServer) OnOpen(c gnet.Conn) (out []byte, action gnet.Action) {
 	return nil, gnet.Close
 }
 
-func (s *DifyServer) OnClose(c gnet.Conn, err error) (action gnet.Action) {
+func (s *MlchainServer) OnClose(c gnet.Conn, err error) (action gnet.Action) {
 	// plugin disconnected
 	s.pluginsLock.Lock()
 	plugin := s.plugins[c.Fd()]
@@ -148,11 +148,11 @@ func (s *DifyServer) OnClose(c gnet.Conn, err error) (action gnet.Action) {
 	return gnet.None
 }
 
-func (s *DifyServer) OnShutdown(c gnet.Engine) {
+func (s *MlchainServer) OnShutdown(c gnet.Engine) {
 	close(s.shutdownChan)
 }
 
-func (s *DifyServer) OnTraffic(c gnet.Conn) (action gnet.Action) {
+func (s *MlchainServer) OnTraffic(c gnet.Conn) (action gnet.Action) {
 	codec := c.Context().(*codec)
 	messages, err := codec.Decode(c)
 	if err != nil {
@@ -179,7 +179,7 @@ func (s *DifyServer) OnTraffic(c gnet.Conn) (action gnet.Action) {
 	return gnet.None
 }
 
-func (s *DifyServer) onMessage(runtime *RemotePluginRuntime, message []byte) {
+func (s *MlchainServer) onMessage(runtime *RemotePluginRuntime, message []byte) {
 	// handle message
 	if runtime.handshakeFailed {
 		// do nothing if handshake has failed

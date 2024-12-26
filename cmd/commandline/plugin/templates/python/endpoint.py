@@ -1,7 +1,7 @@
 import time
 from typing import Mapping
 from werkzeug import Request, Response
-from dify_plugin import Endpoint
+from mlchain_plugin import Endpoint
 
 
 class {{ .PluginName | SnakeToCamel }}Endpoint(Endpoint):

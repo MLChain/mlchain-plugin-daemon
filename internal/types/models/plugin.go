@@ -13,7 +13,7 @@ type Plugin struct {
 	PluginID     string                             `json:"id" gorm:"index;size:255"`
 	Refers       int                                `json:"refers" gorm:"default:0"`
 	InstallType  plugin_entities.PluginRuntimeType  `json:"install_type" gorm:"size:127;index"`
-	ManifestType manifest_entities.DifyManifestType `json:"manifest_type" gorm:"size:127"`
+	ManifestType manifest_entities.MlchainManifestType `json:"manifest_type" gorm:"size:127"`
 	Declaration  plugin_entities.PluginDeclaration  `json:"declaration" gorm:"serializer:json;type:text;size:65535"`
 }
 

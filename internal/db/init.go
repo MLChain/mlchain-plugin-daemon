@@ -11,7 +11,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func initDifyPluginDB(host string, port int, db_name string, user string, pass string, sslmode string) error {
+func initMlchainPluginDB(host string, port int, db_name string, user string, pass string, sslmode string) error {
 	// create db if not exists
 	dsn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=%s", host, port, user, pass, "postgres", sslmode)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
@@ -71,13 +71,13 @@ func initDifyPluginDB(host string, port int, db_name string, user string, pass s
 	}
 
 	pgsqlDB.SetConnMaxIdleTime(time.Minute * 1)
-	DifyPluginDB = db
+	MlchainPluginDB = db
 
 	return nil
 }
 
 func autoMigrate() error {
-	return DifyPluginDB.AutoMigrate(
+	return MlchainPluginDB.AutoMigrate(
 		models.Plugin{},
 		models.PluginInstallation{},
 		models.PluginDeclaration{},
@@ -92,7 +92,7 @@ func autoMigrate() error {
 }
 
 func Init(config *app.Config) {
-	err := initDifyPluginDB(
+	err := initMlchainPluginDB(
 		config.DBHost,
 		int(config.DBPort),
 		config.DBDatabase,
@@ -112,7 +112,7 @@ func Init(config *app.Config) {
 }
 
 func Close() {
-	db, err := DifyPluginDB.DB()
+	db, err := MlchainPluginDB.DB()
 	if err != nil {
 		log.Error("failed to close mlchain plugin db: %v", err)
 		return

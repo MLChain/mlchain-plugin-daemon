@@ -1,6 +1,6 @@
 from typing import IO, Optional
 
-from dify_plugin.errors.model import CredentialsValidateFailedError
+from mlchain_plugin.errors.model import CredentialsValidateFailedError
 
 class {{ .PluginName | SnakeToCamel }}Speech2TextModel(Speech2TextModel):
     """

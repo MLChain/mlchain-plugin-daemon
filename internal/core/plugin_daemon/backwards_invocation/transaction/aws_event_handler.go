@@ -99,7 +99,7 @@ func (h *AWSTransactionHandler) Handle(
 
 			awsResponseWriter := NewAWSTransactionWriter(session, writer)
 
-			if err := backwards_invocation.InvokeDify(
+			if err := backwards_invocation.InvokeMlchain(
 				session.Declaration,
 				session.InvokeFrom,
 				session,

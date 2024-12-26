@@ -8,7 +8,7 @@ import (
 	"github.com/mlchain/mlchain-plugin-daemon/internal/types/validators"
 )
 
-type BaseInvokeDifyRequest struct {
+type BaseInvokeMlchainRequest struct {
 	TenantId string     `json:"tenant_id"`
 	UserId   string     `json:"user_id"`
 	Type     InvokeType `json:"type"`
@@ -43,7 +43,7 @@ type InvokeLLMSchema struct {
 }
 
 type InvokeLLMRequest struct {
-	BaseInvokeDifyRequest
+	BaseInvokeMlchainRequest
 	requests.BaseRequestInvokeModel
 	// requests.InvokeLLMSchema,
 	// TODO: as completion_params in requests.InvokeLLMSchema is "model_parameters", we declare another one here
@@ -51,20 +51,20 @@ type InvokeLLMRequest struct {
 }
 
 type InvokeTextEmbeddingRequest struct {
-	BaseInvokeDifyRequest
+	BaseInvokeMlchainRequest
 	requests.BaseRequestInvokeModel
 	requests.InvokeTextEmbeddingSchema
 }
 
 type InvokeRerankRequest struct {
-	BaseInvokeDifyRequest
+	BaseInvokeMlchainRequest
 	requests.BaseRequestInvokeModel
 	requests.InvokeRerankSchema
 }
 
 type InvokeTTSRequest struct {
-	// BaseInvokeDifyRequest
-	// # TODO: BaseInvokeDifyRequest has a duplicate field with InvokeTTSSchema,
+	// BaseInvokeMlchainRequest
+	// # TODO: BaseInvokeMlchainRequest has a duplicate field with InvokeTTSSchema,
 	// # we should consider to refactor it in the future
 	UserId string     `json:"user_id"`
 	Type   InvokeType `json:"type"`
@@ -73,13 +73,13 @@ type InvokeTTSRequest struct {
 }
 
 type InvokeSpeech2TextRequest struct {
-	BaseInvokeDifyRequest
+	BaseInvokeMlchainRequest
 	requests.BaseRequestInvokeModel
 	requests.InvokeSpeech2TextSchema
 }
 
 type InvokeModerationRequest struct {
-	BaseInvokeDifyRequest
+	BaseInvokeMlchainRequest
 	requests.BaseRequestInvokeModel
 	requests.InvokeModerationSchema
 }
@@ -117,7 +117,7 @@ type InvokeStorageRequest struct {
 }
 
 type InvokeAppRequest struct {
-	BaseInvokeDifyRequest
+	BaseInvokeMlchainRequest
 
 	InvokeAppSchema
 }
@@ -130,7 +130,7 @@ type ModelConfig struct {
 }
 
 type InvokeParameterExtractorRequest struct {
-	BaseInvokeDifyRequest
+	BaseInvokeMlchainRequest
 
 	Parameters []struct {
 		Name        string   `json:"name" validate:"required"`
@@ -146,7 +146,7 @@ type InvokeParameterExtractorRequest struct {
 }
 
 type InvokeQuestionClassifierRequest struct {
-	BaseInvokeDifyRequest
+	BaseInvokeMlchainRequest
 
 	Classes []struct {
 		ID   string `json:"id" validate:"required"`
@@ -196,7 +196,7 @@ type InvokeEncryptSchema struct {
 }
 
 type InvokeEncryptRequest struct {
-	BaseInvokeDifyRequest
+	BaseInvokeMlchainRequest
 
 	InvokeEncryptSchema
 }
@@ -217,7 +217,7 @@ func (r *InvokeEncryptRequest) EncryptRequired(settings map[string]any) bool {
 }
 
 type InvokeToolRequest struct {
-	BaseInvokeDifyRequest
+	BaseInvokeMlchainRequest
 	ToolType requests.ToolType `json:"tool_type" validate:"required,tool_type"`
 	requests.InvokeToolSchema
 }
@@ -239,7 +239,7 @@ type InvokeSummarySchema struct {
 }
 
 type InvokeSummaryRequest struct {
-	BaseInvokeDifyRequest
+	BaseInvokeMlchainRequest
 	InvokeSummarySchema
 }
 
@@ -248,7 +248,7 @@ type InvokeSummaryResponse struct {
 }
 
 type UploadFileRequest struct {
-	BaseInvokeDifyRequest
+	BaseInvokeMlchainRequest
 	Filename string `json:"filename" validate:"required"`
 	MimeType string `json:"mimetype" validate:"required"`
 }

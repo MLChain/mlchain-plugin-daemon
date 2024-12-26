@@ -2,9 +2,9 @@ from typing import Optional
 
 import numpy as np
 
-from dify_plugin.entities.model import EmbeddingInputType
-from dify_plugin.errors.model import CredentialsValidateFailedError
-from dify_plugin.entities.model.text_embedding import (
+from mlchain_plugin.entities.model import EmbeddingInputType
+from mlchain_plugin.errors.model import CredentialsValidateFailedError
+from mlchain_plugin.entities.model.text_embedding import (
     TextEmbeddingResult,
 )
 

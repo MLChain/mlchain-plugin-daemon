@@ -19,7 +19,7 @@ func TestEncryptRequired(t *testing.T) {
 	}
 
 	payload := &mlchain_invocation.InvokeEncryptRequest{
-		BaseInvokeDifyRequest: mlchain_invocation.BaseInvokeDifyRequest{
+		BaseInvokeMlchainRequest: mlchain_invocation.BaseInvokeMlchainRequest{
 			TenantId: "123",
 			UserId:   "456",
 			Type:     mlchain_invocation.INVOKE_TYPE_ENCRYPT,
@@ -101,14 +101,14 @@ func TestInvokeEncrypt(t *testing.T) {
 
 	time.Sleep(1 * time.Second)
 
-	i, err := NewDifyInvocationDaemon(fmt.Sprintf("http://localhost:%d", port), "test")
+	i, err := NewMlchainInvocationDaemon(fmt.Sprintf("http://localhost:%d", port), "test")
 	if err != nil {
-		t.Errorf("InitDifyInvocationDaemon failed: %v", err)
+		t.Errorf("InitMlchainInvocationDaemon failed: %v", err)
 		return
 	}
 
 	payload := &mlchain_invocation.InvokeEncryptRequest{
-		BaseInvokeDifyRequest: mlchain_invocation.BaseInvokeDifyRequest{
+		BaseInvokeMlchainRequest: mlchain_invocation.BaseInvokeMlchainRequest{
 			TenantId: "123",
 			UserId:   "456",
 			Type:     mlchain_invocation.INVOKE_TYPE_ENCRYPT,

@@ -17,7 +17,7 @@ import (
 )
 
 /*
-	DifyPlugin is a file type that represents a plugin, it's designed to based on zip file format.
+	MlchainPlugin is a file type that represents a plugin, it's designed to based on zip file format.
 	When signing a plugin, we use RSA-4096 to create a signature for the plugin and write the signature
 	into comment field of the zip file.
 */

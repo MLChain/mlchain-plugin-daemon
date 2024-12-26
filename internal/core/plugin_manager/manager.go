@@ -50,7 +50,7 @@ type PluginManager struct {
 	// localPluginLaunchingLock is a lock to launch local plugins
 	localPluginLaunchingLock *lock.GranularityLock
 
-	// backwardsInvocation is a handle to invoke dify
+	// backwardsInvocation is a handle to invoke mlchain
 	backwardsInvocation mlchain_invocation.BackwardsInvocation
 
 	// python interpreter path
@@ -136,8 +136,8 @@ func (p *PluginManager) Launch(configuration *app.Config) {
 		log.Panic("init redis client failed: %s", err.Error())
 	}
 
-	invocation, err := real.NewDifyInvocationDaemon(
-		configuration.DifyInnerApiURL, configuration.DifyInnerApiKey,
+	invocation, err := real.NewMlchainInvocationDaemon(
+		configuration.MlchainInnerApiURL, configuration.MlchainInnerApiKey,
 	)
 	if err != nil {
 		log.Panic("init mlchain invocation daemon failed: %s", err.Error())

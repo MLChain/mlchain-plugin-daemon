@@ -1,7 +1,7 @@
 from typing import Any
 
-from dify_plugin import ToolProvider
-from dify_plugin.errors.tool import ToolProviderCredentialValidationError
+from mlchain_plugin import ToolProvider
+from mlchain_plugin.errors.tool import ToolProviderCredentialValidationError
 
 
 class {{ .PluginName | SnakeToCamel }}Provider(ToolProvider):

@@ -18,8 +18,8 @@ var manifest []byte
 //go:embed neko.yaml
 var neko []byte
 
-//go:embed .difyignore
-var dify_ignore []byte
+//go:embed .mlchainignore
+var mlchain_ignore []byte
 
 //go:embed ignored
 var ignored []byte
@@ -50,9 +50,9 @@ func TestPackagerAndVerifier(t *testing.T) {
 		return
 	}
 
-	// create .difyignore
-	if err := os.WriteFile("temp/.difyignore", dify_ignore, 0644); err != nil {
-		t.Errorf("failed to write .difyignore: %s", err.Error())
+	// create .mlchainignore
+	if err := os.WriteFile("temp/.mlchainignore", mlchain_ignore, 0644); err != nil {
+		t.Errorf("failed to write .mlchainignore: %s", err.Error())
 		return
 	}
 

@@ -10,13 +10,13 @@ import (
 	"github.com/mlchain/mlchain-plugin-daemon/internal/utils/stream"
 )
 
-type MockedDifyInvocation struct{}
+type MockedMlchainInvocation struct{}
 
-func NewMockedDifyInvocation() mlchain_invocation.BackwardsInvocation {
-	return &MockedDifyInvocation{}
+func NewMockedMlchainInvocation() mlchain_invocation.BackwardsInvocation {
+	return &MockedMlchainInvocation{}
 }
 
-func (m *MockedDifyInvocation) InvokeLLM(payload *mlchain_invocation.InvokeLLMRequest) (*stream.Stream[model_entities.LLMResultChunk], error) {
+func (m *MockedMlchainInvocation) InvokeLLM(payload *mlchain_invocation.InvokeLLMRequest) (*stream.Stream[model_entities.LLMResultChunk], error) {
 	stream := stream.NewStream[model_entities.LLMResultChunk](5)
 	routine.Submit(nil, func() {
 		stream.Write(model_entities.LLMResultChunk{
@@ -95,7 +95,7 @@ func (m *MockedDifyInvocation) InvokeLLM(payload *mlchain_invocation.InvokeLLMRe
 	return stream, nil
 }
 
-func (m *MockedDifyInvocation) InvokeTextEmbedding(payload *mlchain_invocation.InvokeTextEmbeddingRequest) (*model_entities.TextEmbeddingResult, error) {
+func (m *MockedMlchainInvocation) InvokeTextEmbedding(payload *mlchain_invocation.InvokeTextEmbeddingRequest) (*model_entities.TextEmbeddingResult, error) {
 	result := model_entities.TextEmbeddingResult{
 		Model: payload.Model,
 		Usage: model_entities.EmbeddingUsage{
@@ -113,7 +113,7 @@ func (m *MockedDifyInvocation) InvokeTextEmbedding(payload *mlchain_invocation.I
 	return &result, nil
 }
 
-func (m *MockedDifyInvocation) InvokeRerank(payload *mlchain_invocation.InvokeRerankRequest) (*model_entities.RerankResult, error) {
+func (m *MockedMlchainInvocation) InvokeRerank(payload *mlchain_invocation.InvokeRerankRequest) (*model_entities.RerankResult, error) {
 	result := model_entities.RerankResult{
 		Model: payload.Model,
 	}
@@ -127,7 +127,7 @@ func (m *MockedDifyInvocation) InvokeRerank(payload *mlchain_invocation.InvokeRe
 	return &result, nil
 }
 
-func (m *MockedDifyInvocation) InvokeTTS(payload *mlchain_invocation.InvokeTTSRequest) (*stream.Stream[model_entities.TTSResult], error) {
+func (m *MockedMlchainInvocation) InvokeTTS(payload *mlchain_invocation.InvokeTTSRequest) (*stream.Stream[model_entities.TTSResult], error) {
 	stream := stream.NewStream[model_entities.TTSResult](5)
 	routine.Submit(nil, func() {
 		for i := 0; i < 10; i++ {
@@ -141,21 +141,21 @@ func (m *MockedDifyInvocation) InvokeTTS(payload *mlchain_invocation.InvokeTTSRe
 	return stream, nil
 }
 
-func (m *MockedDifyInvocation) InvokeSpeech2Text(payload *mlchain_invocation.InvokeSpeech2TextRequest) (*model_entities.Speech2TextResult, error) {
+func (m *MockedMlchainInvocation) InvokeSpeech2Text(payload *mlchain_invocation.InvokeSpeech2TextRequest) (*model_entities.Speech2TextResult, error) {
 	result := model_entities.Speech2TextResult{
 		Result: "hello world",
 	}
 	return &result, nil
 }
 
-func (m *MockedDifyInvocation) InvokeModeration(payload *mlchain_invocation.InvokeModerationRequest) (*model_entities.ModerationResult, error) {
+func (m *MockedMlchainInvocation) InvokeModeration(payload *mlchain_invocation.InvokeModerationRequest) (*model_entities.ModerationResult, error) {
 	result := model_entities.ModerationResult{
 		Result: true,
 	}
 	return &result, nil
 }
 
-func (m *MockedDifyInvocation) InvokeTool(payload *mlchain_invocation.InvokeToolRequest) (*stream.Stream[tool_entities.ToolResponseChunk], error) {
+func (m *MockedMlchainInvocation) InvokeTool(payload *mlchain_invocation.InvokeToolRequest) (*stream.Stream[tool_entities.ToolResponseChunk], error) {
 	stream := stream.NewStream[tool_entities.ToolResponseChunk](5)
 	routine.Submit(nil, func() {
 		for i := 0; i < 10; i++ {
@@ -173,7 +173,7 @@ func (m *MockedDifyInvocation) InvokeTool(payload *mlchain_invocation.InvokeTool
 	return stream, nil
 }
 
-func (m *MockedDifyInvocation) InvokeApp(payload *mlchain_invocation.InvokeAppRequest) (*stream.Stream[map[string]any], error) {
+func (m *MockedMlchainInvocation) InvokeApp(payload *mlchain_invocation.InvokeAppRequest) (*stream.Stream[map[string]any], error) {
 	stream := stream.NewStream[map[string]any](5)
 	routine.Submit(nil, func() {
 		stream.Write(map[string]any{
@@ -248,11 +248,11 @@ func (m *MockedDifyInvocation) InvokeApp(payload *mlchain_invocation.InvokeAppRe
 	return stream, nil
 }
 
-func (m *MockedDifyInvocation) InvokeEncrypt(payload *mlchain_invocation.InvokeEncryptRequest) (map[string]any, error) {
+func (m *MockedMlchainInvocation) InvokeEncrypt(payload *mlchain_invocation.InvokeEncryptRequest) (map[string]any, error) {
 	return payload.Data, nil
 }
 
-func (m *MockedDifyInvocation) InvokeParameterExtractor(payload *mlchain_invocation.InvokeParameterExtractorRequest) (*mlchain_invocation.InvokeNodeResponse, error) {
+func (m *MockedMlchainInvocation) InvokeParameterExtractor(payload *mlchain_invocation.InvokeParameterExtractorRequest) (*mlchain_invocation.InvokeNodeResponse, error) {
 	resp := &mlchain_invocation.InvokeNodeResponse{
 		ProcessData: map[string]any{},
 		Outputs:     map[string]any{},
@@ -304,7 +304,7 @@ func (m *MockedDifyInvocation) InvokeParameterExtractor(payload *mlchain_invocat
 	return resp, nil
 }
 
-func (m *MockedDifyInvocation) InvokeQuestionClassifier(payload *mlchain_invocation.InvokeQuestionClassifierRequest) (*mlchain_invocation.InvokeNodeResponse, error) {
+func (m *MockedMlchainInvocation) InvokeQuestionClassifier(payload *mlchain_invocation.InvokeQuestionClassifierRequest) (*mlchain_invocation.InvokeNodeResponse, error) {
 	return &mlchain_invocation.InvokeNodeResponse{
 		ProcessData: map[string]any{},
 		Outputs: map[string]any{
@@ -314,13 +314,13 @@ func (m *MockedDifyInvocation) InvokeQuestionClassifier(payload *mlchain_invocat
 	}, nil
 }
 
-func (m *MockedDifyInvocation) InvokeSummary(payload *mlchain_invocation.InvokeSummaryRequest) (*mlchain_invocation.InvokeSummaryResponse, error) {
+func (m *MockedMlchainInvocation) InvokeSummary(payload *mlchain_invocation.InvokeSummaryRequest) (*mlchain_invocation.InvokeSummaryResponse, error) {
 	return &mlchain_invocation.InvokeSummaryResponse{
 		Summary: payload.Text,
 	}, nil
 }
 
-func (m *MockedDifyInvocation) UploadFile(payload *mlchain_invocation.UploadFileRequest) (*mlchain_invocation.UploadFileResponse, error) {
+func (m *MockedMlchainInvocation) UploadFile(payload *mlchain_invocation.UploadFileRequest) (*mlchain_invocation.UploadFileResponse, error) {
 	return &mlchain_invocation.UploadFileResponse{
 		URL: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
 	}, nil

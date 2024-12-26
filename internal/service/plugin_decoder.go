@@ -21,10 +21,10 @@ func UploadPluginPkg(
 	config *app.Config,
 	c *gin.Context,
 	tenant_id string,
-	dify_pkg_file multipart.File,
+	mlchain_pkg_file multipart.File,
 	verify_signature bool,
 ) *entities.Response {
-	pluginFile, err := io.ReadAll(dify_pkg_file)
+	pluginFile, err := io.ReadAll(mlchain_pkg_file)
 	if err != nil {
 		return exception.InternalServerError(err).ToResponse()
 	}
@@ -68,10 +68,10 @@ func UploadPluginBundle(
 	config *app.Config,
 	c *gin.Context,
 	tenant_id string,
-	dify_bundle_file multipart.File,
+	mlchain_bundle_file multipart.File,
 	verify_signature bool,
 ) *entities.Response {
-	bundleFile, err := io.ReadAll(dify_bundle_file)
+	bundleFile, err := io.ReadAll(mlchain_bundle_file)
 	if err != nil {
 		return exception.InternalServerError(err).ToResponse()
 	}

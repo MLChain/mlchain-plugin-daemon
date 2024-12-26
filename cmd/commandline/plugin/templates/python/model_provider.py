@@ -1,9 +1,9 @@
 import logging
 from collections.abc import Mapping
 
-from dify_plugin import ModelProvider
-from dify_plugin.entities.model import ModelType
-from dify_plugin.errors.model import CredentialsValidateFailedError
+from mlchain_plugin import ModelProvider
+from mlchain_plugin.entities.model import ModelType
+from mlchain_plugin.errors.model import CredentialsValidateFailedError
 
 logger = logging.getLogger(__name__)
 

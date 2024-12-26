@@ -1,6 +1,6 @@
-from dify_plugin import Plugin, DifyPluginEnv
+from mlchain_plugin import Plugin, MlchainPluginEnv
 
-plugin = Plugin(DifyPluginEnv(MAX_REQUEST_TIMEOUT=120))
+plugin = Plugin(MlchainPluginEnv(MAX_REQUEST_TIMEOUT=120))
 
 if __name__ == '__main__':
     plugin.run()

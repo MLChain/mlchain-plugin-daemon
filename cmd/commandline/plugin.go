@@ -47,7 +47,7 @@ var (
 					fmt.Println("Error: invalid input path, you should specify the path outside of plugin directory")
 					return
 				}
-				outputPath = base + ".difypkg"
+				outputPath = base + ".mlchainpkg"
 			}
 
 			plugin.PackagePlugin(inputPath, outputPath)
@@ -57,7 +57,7 @@ var (
 	pluginChecksumCommand = &cobra.Command{
 		Use:   "checksum [plugin_path]",
 		Short: "Checksum",
-		Long:  "Calculate the checksum of the plugin, you need specify the plugin path or .difypkg file path",
+		Long:  "Calculate the checksum of the plugin, you need specify the plugin path or .mlchainpkg file path",
 		Args:  cobra.ExactArgs(1),
 		Run: func(cmd *cobra.Command, args []string) {
 			pluginPath := args[0]

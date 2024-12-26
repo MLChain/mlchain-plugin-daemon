@@ -1,8 +1,8 @@
 from collections.abc import Generator
 from typing import Optional
 
-from dify_plugin import TTSModel
-from dify_plugin.errors.model import (
+from mlchain_plugin import TTSModel
+from mlchain_plugin.errors.model import (
     CredentialsValidateFailedError,
 )
 

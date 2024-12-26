@@ -94,7 +94,7 @@ func Endpoint(
 
 	// decrypt settings
 	settings, err := manager.BackwardsInvocation().InvokeEncrypt(&mlchain_invocation.InvokeEncryptRequest{
-		BaseInvokeDifyRequest: mlchain_invocation.BaseInvokeDifyRequest{
+		BaseInvokeMlchainRequest: mlchain_invocation.BaseInvokeMlchainRequest{
 			TenantId: endpoint.TenantID,
 			UserId:   "",
 			Type:     mlchain_invocation.INVOKE_TYPE_ENCRYPT,
@@ -281,7 +281,7 @@ func ListEndpoints(tenant_id string, page int, page_size int) *entities.Response
 		}
 
 		decryptedSettings, err := manager.BackwardsInvocation().InvokeEncrypt(&mlchain_invocation.InvokeEncryptRequest{
-			BaseInvokeDifyRequest: mlchain_invocation.BaseInvokeDifyRequest{
+			BaseInvokeMlchainRequest: mlchain_invocation.BaseInvokeMlchainRequest{
 				TenantId: tenant_id,
 				UserId:   "",
 				Type:     mlchain_invocation.INVOKE_TYPE_ENCRYPT,
@@ -367,7 +367,7 @@ func ListPluginEndpoints(tenant_id string, plugin_id string, page int, page_size
 		}
 
 		decryptedSettings, err := manager.BackwardsInvocation().InvokeEncrypt(&mlchain_invocation.InvokeEncryptRequest{
-			BaseInvokeDifyRequest: mlchain_invocation.BaseInvokeDifyRequest{
+			BaseInvokeMlchainRequest: mlchain_invocation.BaseInvokeMlchainRequest{
 				TenantId: tenant_id,
 				UserId:   "",
 				Type:     mlchain_invocation.INVOKE_TYPE_ENCRYPT,

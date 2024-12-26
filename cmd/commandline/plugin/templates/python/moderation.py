@@ -1,7 +1,7 @@
 from typing import Optional
 
-from dify_plugin.errors.model import CredentialsValidateFailedError
-from dify_plugin import ModerationModel
+from mlchain_plugin.errors.model import CredentialsValidateFailedError
+from mlchain_plugin import ModerationModel
 
 class {{ .PluginName | SnakeToCamel }}ModerationModel(ModerationModel):
     """

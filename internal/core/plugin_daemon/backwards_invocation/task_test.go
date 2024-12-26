@@ -20,7 +20,7 @@ func getTestSession() *session_manager.Session {
 			InvokeFrom:             access_types.PLUGIN_ACCESS_TYPE_ENDPOINT,
 			Action:                 access_types.PLUGIN_ACCESS_ACTION_GET_AI_MODEL_SCHEMAS,
 			Declaration:            nil,
-			BackwardsInvocation:    tester.NewMockedDifyInvocation(),
+			BackwardsInvocation:    tester.NewMockedMlchainInvocation(),
 			IgnoreCache:            true,
 		},
 	)

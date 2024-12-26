@@ -123,7 +123,7 @@ func (p *GenericBundlePackager) AppendPackageDependency(packagePath string) erro
 	// try decode the file as a zip file
 	zipDecoder, err := decoder.NewZipPluginDecoder(file)
 	if err != nil {
-		return errors.Join(err, errors.New("please provider a valid difypkg file"))
+		return errors.Join(err, errors.New("please provider a valid mlchainpkg file"))
 	}
 
 	checksum, err := zipDecoder.Checksum()

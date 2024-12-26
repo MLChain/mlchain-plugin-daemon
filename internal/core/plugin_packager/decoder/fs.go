@@ -61,10 +61,10 @@ func (d *FSPluginDecoder) Open() error {
 }
 
 func (d *FSPluginDecoder) Walk(fn func(filename string, dir string) error) error {
-	// read .difyignore file
+	// read .mlchainignore file
 	ignorePatterns := []gitignore.Pattern{}
-	// Try .difyignore first, fallback to .gitignore if not found
-	ignoreBytes, err := d.ReadFile(".difyignore")
+	// Try .mlchainignore first, fallback to .gitignore if not found
+	ignoreBytes, err := d.ReadFile(".mlchainignore")
 	if err != nil {
 		ignoreBytes, err = d.ReadFile(".gitignore")
 	}
