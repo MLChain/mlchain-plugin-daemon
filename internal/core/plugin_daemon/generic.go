@@ -49,7 +49,7 @@ func GenericInvokePlugin[Req any, Rsp any](
 				response.Close()
 				return
 			}
-			if err := backwards_invocation.InvokeDify(
+			if err := backwards_invocation.InvokeMlchain(
 				runtime.Configuration(),
 				session.InvokeFrom,
 				session,
@@ -57,7 +57,7 @@ func GenericInvokePlugin[Req any, Rsp any](
 				chunk.Data,
 			); err != nil {
 				response.WriteError(errors.New(parser.MarshalJson(map[string]string{
-					"error_type": "invoke_dify_error",
+					"error_type": "invoke_mlchain_error",
 					"message":    fmt.Sprintf("invoke mlchain failed: %s", err.Error()),
 				})))
 				response.Close()

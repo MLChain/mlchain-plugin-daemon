@@ -140,7 +140,7 @@ type PluginExtensions struct {
 
 type PluginDeclarationWithoutAdvancedFields struct {
 	Version     manifest_entities.Version          `json:"version" yaml:"version,omitempty" validate:"required,version"`
-	Type        manifest_entities.DifyManifestType `json:"type" yaml:"type,omitempty" validate:"required,eq=plugin"`
+	Type        manifest_entities.MlchainManifestType `json:"type" yaml:"type,omitempty" validate:"required,eq=plugin"`
 	Author      string                             `json:"author" yaml:"author,omitempty" validate:"omitempty,max=64"`
 	Name        string                             `json:"name" yaml:"name,omitempty" validate:"required,max=128"`
 	Label       I18nObject                         `json:"label" yaml:"label" validate:"required"`

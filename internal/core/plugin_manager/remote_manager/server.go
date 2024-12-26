@@ -21,7 +21,7 @@ import (
 )
 
 type RemotePluginServer struct {
-	server *DifyServer
+	server *MlchainServer
 }
 
 type RemotePluginServerInterface interface {
@@ -114,7 +114,7 @@ func NewRemotePluginServer(config *app.Config, media_manager *media_manager.Medi
 	)
 
 	multicore := true
-	s := &DifyServer{
+	s := &MlchainServer{
 		mediaManager: media_manager,
 		addr:         addr,
 		port:         config.PluginRemoteInstallingPort,

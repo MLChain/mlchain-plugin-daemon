@@ -8,7 +8,7 @@ func (config *Config) SetDefault() {
 	setDefaultInt(&config.LifetimeCollectionGCInterval, 60)
 	setDefaultInt(&config.LifetimeCollectionHeartbeatInterval, 5)
 	setDefaultInt(&config.LifetimeStateGCInterval, 300)
-	setDefaultInt(&config.DifyInvocationConnectionIdleTimeout, 120)
+	setDefaultInt(&config.MlchainInvocationConnectionIdleTimeout, 120)
 	setDefaultInt(&config.PluginRemoteInstallServerEventLoopNums, 8)
 	setDefaultInt(&config.PluginRemoteInstallingMaxConn, 256)
 	setDefaultInt(&config.MaxPluginPackageSize, 52428800)

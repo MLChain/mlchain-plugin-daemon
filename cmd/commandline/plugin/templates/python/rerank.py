@@ -2,10 +2,10 @@ from typing import Optional
 
 import httpx
 
-from dify_plugin import RerankModel
-from dify_plugin.entities import I18nObject
-from dify_plugin.entities.model import AIModelEntity, FetchFrom, ModelPropertyKey, ModelType
-from dify_plugin.errors.model import (
+from mlchain_plugin import RerankModel
+from mlchain_plugin.entities import I18nObject
+from mlchain_plugin.entities.model import AIModelEntity, FetchFrom, ModelPropertyKey, ModelType
+from mlchain_plugin.errors.model import (
     CredentialsValidateFailedError,
     InvokeAuthorizationError,
     InvokeBadRequestError,
@@ -14,7 +14,7 @@ from dify_plugin.errors.model import (
     InvokeRateLimitError,
     InvokeServerUnavailableError,
 )
-from dify_plugin.entities.model.rerank import (
+from mlchain_plugin.entities.model.rerank import (
     RerankDocument,
     RerankResult,
 )

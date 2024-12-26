@@ -12,8 +12,8 @@ type Config struct {
 	ServerKey  string `envconfig:"SERVER_KEY" validate:"required"`
 
 	// mlchain inner api
-	DifyInnerApiURL string `envconfig:"MLCHAIN_INNER_API_URL" validate:"required"`
-	DifyInnerApiKey string `envconfig:"MLCHAIN_INNER_API_KEY" validate:"required"`
+	MlchainInnerApiURL string `envconfig:"MLCHAIN_INNER_API_URL" validate:"required"`
+	MlchainInnerApiKey string `envconfig:"MLCHAIN_INNER_API_KEY" validate:"required"`
 
 	AWSAccessKey string `envconfig:"AWS_ACCESS_KEY"`
 	AWSSecretKey string `envconfig:"AWS_SECRET_KEY"`
@@ -72,10 +72,10 @@ type Config struct {
 	LifetimeCollectionGCInterval        int `envconfig:"LIFETIME_COLLECTION_GC_INTERVAL" validate:"required"`
 	LifetimeStateGCInterval             int `envconfig:"LIFETIME_STATE_GC_INTERVAL" validate:"required"`
 
-	DifyInvocationConnectionIdleTimeout int `envconfig:"MLCHAIN_INVOCATION_CONNECTION_IDLE_TIMEOUT" validate:"required"`
+	MlchainInvocationConnectionIdleTimeout int `envconfig:"MLCHAIN_INVOCATION_CONNECTION_IDLE_TIMEOUT" validate:"required"`
 
-	DifyPluginServerlessConnectorURL    *string `envconfig:"MLCHAIN_PLUGIN_SERVERLESS_CONNECTOR_URL"`
-	DifyPluginServerlessConnectorAPIKey *string `envconfig:"MLCHAIN_PLUGIN_SERVERLESS_CONNECTOR_API_KEY"`
+	MlchainPluginServerlessConnectorURL    *string `envconfig:"MLCHAIN_PLUGIN_SERVERLESS_CONNECTOR_URL"`
+	MlchainPluginServerlessConnectorAPIKey *string `envconfig:"MLCHAIN_PLUGIN_SERVERLESS_CONNECTOR_API_KEY"`
 
 	MaxPluginPackageSize           int64 `envconfig:"MAX_PLUGIN_PACKAGE_SIZE" validate:"required"`
 	MaxBundlePackageSize           int64 `envconfig:"MAX_BUNDLE_PACKAGE_SIZE" validate:"required"`
@@ -118,11 +118,11 @@ func (c *Config) Validate() error {
 	}
 
 	if c.Platform == PLATFORM_AWS_LAMBDA {
-		if c.DifyPluginServerlessConnectorURL == nil {
+		if c.MlchainPluginServerlessConnectorURL == nil {
 			return fmt.Errorf("mlchain plugin serverless connector url is empty")
 		}
 
-		if c.DifyPluginServerlessConnectorAPIKey == nil {
+		if c.MlchainPluginServerlessConnectorAPIKey == nil {
 			return fmt.Errorf("mlchain plugin serverless connector api key is empty")
 		}
 

@@ -12,7 +12,7 @@ import (
 	"github.com/mlchain/mlchain-plugin-daemon/internal/utils/log"
 )
 
-// DifyPlugin supports register and use endpoint to improve the plugin's functionality
+// MlchainPlugin supports register and use endpoint to improve the plugin's functionality
 // you can use it to do some magics, looking forward to your imagination, Ciallo～(∠·ω< )⌒
 // - Yeuoly
 

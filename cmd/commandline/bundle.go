@@ -142,7 +142,7 @@ var (
 					fmt.Println("Error: invalid input path, you should specify the path outside of bundle directory")
 					return
 				}
-				outputPath = base + ".difybndl"
+				outputPath = base + ".mlchainbndl"
 			}
 
 			bundle.PackageBundle(bundlePath, outputPath)

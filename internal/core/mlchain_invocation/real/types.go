@@ -6,8 +6,8 @@ import (
 )
 
 type RealBackwardsInvocation struct {
-	difyInnerApiKey     string
-	difyInnerApiBaseurl *url.URL
+	mlchainInnerApiKey     string
+	mlchainInnerApiBaseurl *url.URL
 	client              *http.Client
 }
 

@@ -76,7 +76,7 @@ func SetupEndpoint(
 	// encrypt settings
 	encryptedSettings, err := manager.BackwardsInvocation().InvokeEncrypt(
 		&mlchain_invocation.InvokeEncryptRequest{
-			BaseInvokeDifyRequest: mlchain_invocation.BaseInvokeDifyRequest{
+			BaseInvokeMlchainRequest: mlchain_invocation.BaseInvokeMlchainRequest{
 				TenantId: tenant_id,
 				UserId:   user_id,
 				Type:     mlchain_invocation.INVOKE_TYPE_ENCRYPT,
@@ -123,7 +123,7 @@ func RemoveEndpoint(endpoint_id string, tenant_id string) *entities.Response {
 
 	// clear credentials cache
 	if _, err := manager.BackwardsInvocation().InvokeEncrypt(&mlchain_invocation.InvokeEncryptRequest{
-		BaseInvokeDifyRequest: mlchain_invocation.BaseInvokeDifyRequest{
+		BaseInvokeMlchainRequest: mlchain_invocation.BaseInvokeMlchainRequest{
 			TenantId: tenant_id,
 			UserId:   "",
 			Type:     mlchain_invocation.INVOKE_TYPE_ENCRYPT,
@@ -188,7 +188,7 @@ func UpdateEndpoint(endpoint_id string, tenant_id string, user_id string, name s
 
 	originalSettings, err := manager.BackwardsInvocation().InvokeEncrypt(
 		&mlchain_invocation.InvokeEncryptRequest{
-			BaseInvokeDifyRequest: mlchain_invocation.BaseInvokeDifyRequest{
+			BaseInvokeMlchainRequest: mlchain_invocation.BaseInvokeMlchainRequest{
 				TenantId: tenant_id,
 				UserId:   user_id,
 				Type:     mlchain_invocation.INVOKE_TYPE_ENCRYPT,
@@ -236,7 +236,7 @@ func UpdateEndpoint(endpoint_id string, tenant_id string, user_id string, name s
 	// encrypt settings
 	encryptedSettings, err := manager.BackwardsInvocation().InvokeEncrypt(
 		&mlchain_invocation.InvokeEncryptRequest{
-			BaseInvokeDifyRequest: mlchain_invocation.BaseInvokeDifyRequest{
+			BaseInvokeMlchainRequest: mlchain_invocation.BaseInvokeMlchainRequest{
 				TenantId: tenant_id,
 				UserId:   user_id,
 				Type:     mlchain_invocation.INVOKE_TYPE_ENCRYPT,
@@ -261,7 +261,7 @@ func UpdateEndpoint(endpoint_id string, tenant_id string, user_id string, name s
 
 	// clear credentials cache
 	if _, err := manager.BackwardsInvocation().InvokeEncrypt(&mlchain_invocation.InvokeEncryptRequest{
-		BaseInvokeDifyRequest: mlchain_invocation.BaseInvokeDifyRequest{
+		BaseInvokeMlchainRequest: mlchain_invocation.BaseInvokeMlchainRequest{
 			TenantId: tenant_id,
 			UserId:   user_id,
 			Type:     mlchain_invocation.INVOKE_TYPE_ENCRYPT,

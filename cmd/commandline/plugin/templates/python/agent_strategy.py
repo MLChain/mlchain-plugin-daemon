@@ -2,8 +2,8 @@ from collections.abc import Generator
 from typing import Any
 
 
-from dify_plugin.entities.agent import AgentInvokeMessage
-from dify_plugin.interfaces.agent import AgentStrategy
+from mlchain_plugin.entities.agent import AgentInvokeMessage
+from mlchain_plugin.interfaces.agent import AgentStrategy
 
 
 class {{ .PluginName | SnakeToCamel }}AgentStrategy(AgentStrategy):

@@ -18,7 +18,7 @@ var (
 
 func Init(config *app.Config) {
 	var err error
-	baseurl, err = url.Parse(*config.DifyPluginServerlessConnectorURL)
+	baseurl, err = url.Parse(*config.MlchainPluginServerlessConnectorURL)
 	if err != nil {
 		log.Panic("Failed to parse serverless connector url", err)
 	}
@@ -33,7 +33,7 @@ func Init(config *app.Config) {
 		},
 	}
 
-	SERVERLESS_CONNECTOR_API_KEY = *config.DifyPluginServerlessConnectorAPIKey
+	SERVERLESS_CONNECTOR_API_KEY = *config.MlchainPluginServerlessConnectorAPIKey
 
 	if err := Ping(); err != nil {
 		log.Panic("Failed to ping serverless connector", err)

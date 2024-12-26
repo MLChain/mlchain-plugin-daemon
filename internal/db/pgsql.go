@@ -12,7 +12,7 @@ import (
 	ORM for pgsql
 */
 
-var DifyPluginDB *gorm.DB
+var MlchainPluginDB *gorm.DB
 
 var (
 	ErrDatabaseNotFound = gorm.ErrRecordNotFound
@@ -22,21 +22,21 @@ func Create(data any, ctx ...*gorm.DB) error {
 	if len(ctx) > 0 {
 		return ctx[0].Create(data).Error
 	}
-	return DifyPluginDB.Create(data).Error
+	return MlchainPluginDB.Create(data).Error
 }
 
 func Update(data any, ctx ...*gorm.DB) error {
 	if len(ctx) > 0 {
 		return ctx[0].Save(data).Error
 	}
-	return DifyPluginDB.Save(data).Error
+	return MlchainPluginDB.Save(data).Error
 }
 
 func Delete(data any, ctx ...*gorm.DB) error {
 	if len(ctx) > 0 {
 		return ctx[0].Delete(data).Error
 	}
-	return DifyPluginDB.Delete(data).Error
+	return MlchainPluginDB.Delete(data).Error
 }
 
 func DeleteByCondition[T any](condition T, ctx ...*gorm.DB) error {
@@ -44,21 +44,21 @@ func DeleteByCondition[T any](condition T, ctx ...*gorm.DB) error {
 	if len(ctx) > 0 {
 		return ctx[0].Where(condition).Delete(&model).Error
 	}
-	return DifyPluginDB.Where(condition).Delete(&model).Error
+	return MlchainPluginDB.Where(condition).Delete(&model).Error
 }
 
 func ReplaceAssociation[T any, R any](source *T, field string, associations []R, ctx ...*gorm.DB) error {
 	if len(ctx) > 0 {
 		return ctx[0].Model(source).Association(field).Replace(associations)
 	}
-	return DifyPluginDB.Model(source).Association(field).Replace(associations)
+	return MlchainPluginDB.Model(source).Association(field).Replace(associations)
 }
 
 func AppendAssociation[T any, R any](source *T, field string, associations R, ctx ...*gorm.DB) error {
 	if len(ctx) > 0 {
 		return ctx[0].Model(source).Association(field).Append(associations)
 	}
-	return DifyPluginDB.Model(source).Association(field).Append(associations)
+	return MlchainPluginDB.Model(source).Association(field).Append(associations)
 }
 
 type genericComparableConstraint interface {
@@ -235,7 +235,7 @@ func InArray(field string, value []interface{}) GenericQuery {
 }
 
 func Run(query ...GenericQuery) error {
-	tmp := DifyPluginDB
+	tmp := MlchainPluginDB
 	for _, q := range query {
 		tmp = q(tmp)
 	}
@@ -246,13 +246,13 @@ func Run(query ...GenericQuery) error {
 
 func GetAny[T any](sql string, data ...interface{}) (T /* data */, error) {
 	var result T
-	err := DifyPluginDB.Raw(sql, data...).Scan(&result).Error
+	err := MlchainPluginDB.Raw(sql, data...).Scan(&result).Error
 	return result, err
 }
 
 func GetOne[T any](query ...GenericQuery) (T /* data */, error) {
 	var data T
-	tmp := DifyPluginDB
+	tmp := MlchainPluginDB
 	for _, q := range query {
 		tmp = q(tmp)
 	}
@@ -262,7 +262,7 @@ func GetOne[T any](query ...GenericQuery) (T /* data */, error) {
 
 func GetAll[T any](query ...GenericQuery) ([]T /* data */, error) {
 	var data []T
-	tmp := DifyPluginDB
+	tmp := MlchainPluginDB
 	for _, q := range query {
 		tmp = q(tmp)
 	}
@@ -273,7 +273,7 @@ func GetAll[T any](query ...GenericQuery) ([]T /* data */, error) {
 func GetCount[T any](query ...GenericQuery) (int64 /* count */, error) {
 	var model T
 	var count int64
-	tmp := DifyPluginDB
+	tmp := MlchainPluginDB
 	for _, q := range query {
 		tmp = q(tmp)
 	}
@@ -284,7 +284,7 @@ func GetCount[T any](query ...GenericQuery) (int64 /* count */, error) {
 func GetSum[T any, R genericComparableConstraint](fields string, query ...GenericQuery) (R, error) {
 	var model T
 	var sum R
-	tmp := DifyPluginDB
+	tmp := MlchainPluginDB
 	for _, q := range query {
 		tmp = q(tmp)
 	}
@@ -294,7 +294,7 @@ func GetSum[T any, R genericComparableConstraint](fields string, query ...Generi
 
 func DelAssociation[T any](field string, query ...GenericQuery) error {
 	var model T
-	tmp := DifyPluginDB.Model(&model)
+	tmp := MlchainPluginDB.Model(&model)
 	for _, q := range query {
 		tmp = q(tmp)
 	}
@@ -303,7 +303,7 @@ func DelAssociation[T any](field string, query ...GenericQuery) error {
 
 func WithTransaction(fn func(tx *gorm.DB) error, ctx ...*gorm.DB) error {
 	// Start a transaction
-	db := DifyPluginDB
+	db := MlchainPluginDB
 	if len(ctx) > 0 {
 		db = ctx[0]
 	}
@@ -326,15 +326,15 @@ func WithTransaction(fn func(tx *gorm.DB) error, ctx ...*gorm.DB) error {
 
 // NOTE: not used in production, only for testing
 func DropTable(model any) error {
-	return DifyPluginDB.Migrator().DropTable(model)
+	return MlchainPluginDB.Migrator().DropTable(model)
 }
 
 // NOTE: not used in production, only for testing
 func CreateDatabase(dbname string) error {
-	return DifyPluginDB.Exec(fmt.Sprintf("CREATE DATABASE %s", dbname)).Error
+	return MlchainPluginDB.Exec(fmt.Sprintf("CREATE DATABASE %s", dbname)).Error
 }
 
 // NOTE: not used in production, only for testing
 func CreateTable(model any) error {
-	return DifyPluginDB.Migrator().CreateTable(model)
+	return MlchainPluginDB.Migrator().CreateTable(model)
 }

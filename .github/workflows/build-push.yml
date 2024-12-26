@@ -68,13 +68,13 @@ jobs:
             type=raw,value=${{ github.ref_name }},enable=${{ startsWith(github.ref, 'refs/tags/') }}
 
       - name: Run Build Docker Image
-        run: docker build -t dify-plugin-daemon -f ./docker/${{ matrix.scope }}/Dockerfile .
+        run: docker build -t mlchain-plugin-daemon -f ./docker/${{ matrix.scope }}/Dockerfile .
 
       - name: Tag Docker Images
         run:
           for tag in $(echo "${{ steps.meta.outputs.tags }}" | tr ',' '\n');
           do
-            docker tag dify-plugin-daemon "$tag-${{ matrix.scope }}-${{ env.PLATFORM_PAIR }}";
+            docker tag mlchain-plugin-daemon "$tag-${{ matrix.scope }}-${{ env.PLATFORM_PAIR }}";
           done
       - name: Push Docker Image
         run:

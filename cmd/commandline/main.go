@@ -14,7 +14,7 @@ var (
 	rootCommand = &cobra.Command{
 		Use:   "mlchain",
 		Short: "mlchain",
-		Long:  "Mlchain is a cli tool to help you develop your Dify projects.",
+		Long:  "Mlchain is a cli tool to help you develop your Mlchain projects.",
 	}
 
 	pluginCommand = &cobra.Command{
@@ -42,7 +42,7 @@ var (
 func init() {
 	cobra.OnInitialize(initConfig)
 
-	rootCommand.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.dify.yaml)")
+	rootCommand.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.mlchain.yaml)")
 	rootCommand.AddCommand(pluginCommand)
 	rootCommand.AddCommand(bundleCommand)
 	rootCommand.AddCommand(versionCommand)
@@ -57,10 +57,10 @@ func initConfig() {
 		home, err := os.UserHomeDir()
 		cobra.CheckErr(err)
 
-		// Search config in home directory with name ".dify" (without extension).
+		// Search config in home directory with name ".mlchain" (without extension).
 		viper.AddConfigPath(home)
 		viper.SetConfigType("yaml")
-		viper.SetConfigName(".dify")
+		viper.SetConfigName(".mlchain")
 	}
 
 	viper.AutomaticEnv()

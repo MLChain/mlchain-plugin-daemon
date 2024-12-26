@@ -1,13 +1,13 @@
-## User Guide of how to develop a Dify Plugin
+## User Guide of how to develop a Mlchain Plugin
 
 Hi there, looks like you have already created a Plugin, now let's get you started with the development!
 
 ### Choose a Plugin type you want to develop
 
-Before start, you need some basic knowledge about the Plugin types, Plugin supports to extend the following abilities in Dify:
+Before start, you need some basic knowledge about the Plugin types, Plugin supports to extend the following abilities in Mlchain:
 - **Tool**: Tool Providers like Google Search, Stable Diffusion, etc. it can be used to perform a specific task.
 - **Model**: Model Providers like OpenAI, Anthropic, etc. you can use their models to enhance the AI capabilities.
-- **Endpoint**: Like Service API in Dify and Ingress in Kubernetes, you can extend a http service as an endpoint and control its logics using your own code.
+- **Endpoint**: Like Service API in Mlchain and Ingress in Kubernetes, you can extend a http service as an endpoint and control its logics using your own code.
 
 Based on the ability you want to extend, we have divided the Plugin into three types: **Tool**, **Model**, and **Extension**.
 
@@ -51,9 +51,9 @@ Now you can edit the `manifest.yaml` file to describe your Plugin, here is the b
       - size(int64)：Maximum allowed persistent memory, unit bytes
 - plugins(object, required)：Plugin extension specific ability yaml file list, absolute path in the plugin package, if you need to extend the model, you need to define a file like openai.yaml, and fill in the path here, and the file on the path must exist, otherwise the packaging will fail.
   - Format
-    - tools(list[string]): Extended tool suppliers, as for the detailed format, please refer to [Tool Guide](https://docs.dify.ai/docs/plugins/standard/tool_provider)
-    - models(list[string])：Extended model suppliers, as for the detailed format, please refer to [Model Guide](https://docs.dify.ai/docs/plugins/standard/model_provider)
-    - endpoints(list[string])：Extended Endpoints suppliers, as for the detailed format, please refer to [Endpoint Guide](https://docs.dify.ai/docs/plugins/standard/endpoint_group)
+    - tools(list[string]): Extended tool suppliers, as for the detailed format, please refer to [Tool Guide](https://docs.mlchain.ai/docs/plugins/standard/tool_provider)
+    - models(list[string])：Extended model suppliers, as for the detailed format, please refer to [Model Guide](https://docs.mlchain.ai/docs/plugins/standard/model_provider)
+    - endpoints(list[string])：Extended Endpoints suppliers, as for the detailed format, please refer to [Endpoint Guide](https://docs.mlchain.ai/docs/plugins/standard/endpoint_group)
   - Restrictions
     - Not allowed to extend both tools and models
     - Not allowed to have no extension
@@ -88,10 +88,10 @@ Now you can start to implement your Plugin, by following these examples, you can
 
 You may already noticed that a `.env.example` file in the root directory of your Plugin, just copy it to `.env` and fill in the corresponding values, there are some environment variables you need to set if you want to debug your Plugin locally.
 
-- `INSTALL_METHOD`: Set this to `remote`, your plugin will connect to a Dify instance through the network.
-- `REMOTE_INSTALL_HOST`: The host of your Dify instance, you can use our SaaS instance `https://debug.dify.ai`, or self-hosted Dify instance.
-- `REMOTE_INSTALL_PORT`: The port of your Dify instance, default is 5003
-- `REMOTE_INSTALL_KEY`: You should get your debugging key from the Dify instance you used, at the right top of the plugin management page, you can see a button with a `debug` icon, click it and you will get the key.
+- `INSTALL_METHOD`: Set this to `remote`, your plugin will connect to a Mlchain instance through the network.
+- `REMOTE_INSTALL_HOST`: The host of your Mlchain instance, you can use our SaaS instance `https://debug.mlchain.ai`, or self-hosted Mlchain instance.
+- `REMOTE_INSTALL_PORT`: The port of your Mlchain instance, default is 5003
+- `REMOTE_INSTALL_KEY`: You should get your debugging key from the Mlchain instance you used, at the right top of the plugin management page, you can see a button with a `debug` icon, click it and you will get the key.
 
 Run the following command to start your Plugin:
 
@@ -99,14 +99,14 @@ Run the following command to start your Plugin:
 python -m main
 ```
 
-Refresh the page of your Dify instance, you should be able to see your Plugin in the list now, but it will be marked as `debugging`, you can use it normally, but not recommended for production.
+Refresh the page of your Mlchain instance, you should be able to see your Plugin in the list now, but it will be marked as `debugging`, you can use it normally, but not recommended for production.
 
 ### Package the Plugin
 
 After all, just package your Plugin by running the following command:
 
 ```bash
-dify-plugin plugin package ./ROOT_DIRECTORY_OF_YOUR_PLUGIN
+mlchain-plugin plugin package ./ROOT_DIRECTORY_OF_YOUR_PLUGIN
 ```
 
-you will get a `plugin.difypkg` file, that's all, you can submit it to the Marketplace now, look forward to your Plugin being listed!
+you will get a `plugin.mlchainpkg` file, that's all, you can submit it to the Marketplace now, look forward to your Plugin being listed!

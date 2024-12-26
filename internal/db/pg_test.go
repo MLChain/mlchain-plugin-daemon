@@ -8,7 +8,7 @@ import (
 )
 
 func TestTransaction(t *testing.T) {
-	if err := initDifyPluginDB("0.0.0.0", 5432, "testing", "postgres", "mlchainai123456", "disable"); err != nil {
+	if err := initMlchainPluginDB("0.0.0.0", 5432, "testing", "postgres", "mlchainai123456", "disable"); err != nil {
 		t.Fatal(err)
 	}
 	defer Close()

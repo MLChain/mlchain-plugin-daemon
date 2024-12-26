@@ -1,6 +1,6 @@
 package real
 
-func (r *RealBackwardsInvocation) difyPath(path ...string) string {
+func (r *RealBackwardsInvocation) mlchainPath(path ...string) string {
 	path = append([]string{"inner", "api"}, path...)
-	return r.difyInnerApiBaseurl.JoinPath(path...).String()
+	return r.mlchainInnerApiBaseurl.JoinPath(path...).String()
 }

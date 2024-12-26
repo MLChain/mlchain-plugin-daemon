@@ -94,7 +94,7 @@ var PYTHON_AGENT_STRATEGY_TEMPLATE []byte
 //go:embed templates/python/GUIDE.md
 var PYTHON_GUIDE []byte
 
-//go:embed templates/python/.difyignore
+//go:embed templates/python/.mlchainignore
 var PYTHON_MLCHAINIGNORE []byte
 
 //go:embed templates/python/.gitignore
@@ -155,7 +155,7 @@ func createPythonEnvironment(
 		return err
 	}
 
-	if err := writeFile(filepath.Join(root, ".difyignore"), string(PYTHON_MLCHAINIGNORE)); err != nil {
+	if err := writeFile(filepath.Join(root, ".mlchainignore"), string(PYTHON_MLCHAINIGNORE)); err != nil {
 		return err
 	}
 

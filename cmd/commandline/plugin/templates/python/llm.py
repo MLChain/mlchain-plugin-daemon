@@ -2,19 +2,19 @@ import logging
 from collections.abc import Generator
 from typing import Optional, Union
 
-from dify_plugin.entities import I18nObject
-from dify_plugin.errors.model import (
+from mlchain_plugin.entities import I18nObject
+from mlchain_plugin.errors.model import (
     CredentialsValidateFailedError,
 )
-from dify_plugin.entities.model import (
+from mlchain_plugin.entities.model import (
     AIModelEntity,
     FetchFrom,
     ModelType,
 )
-from dify_plugin.entities.model.llm import (
+from mlchain_plugin.entities.model.llm import (
     LLMResult,
 )
-from dify_plugin.entities.model.message import (
+from mlchain_plugin.entities.model.message import (
     PromptMessage,
     PromptMessageTool,
 )

@@ -9,7 +9,7 @@ import (
 	"github.com/mlchain/mlchain-plugin-daemon/internal/core/mlchain_invocation"
 )
 
-func NewDifyInvocationDaemon(base string, calling_key string) (mlchain_invocation.BackwardsInvocation, error) {
+func NewMlchainInvocationDaemon(base string, calling_key string) (mlchain_invocation.BackwardsInvocation, error) {
 	var err error
 	invocation := &RealBackwardsInvocation{}
 	baseurl, err := url.Parse(base)
@@ -27,9 +27,9 @@ func NewDifyInvocationDaemon(base string, calling_key string) (mlchain_invocatio
 		},
 	}
 
-	invocation.difyInnerApiBaseurl = baseurl
+	invocation.mlchainInnerApiBaseurl = baseurl
 	invocation.client = client
-	invocation.difyInnerApiKey = calling_key
+	invocation.mlchainInnerApiKey = calling_key
 
 	return invocation, nil
 }

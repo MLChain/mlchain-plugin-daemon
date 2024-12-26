@@ -15,7 +15,7 @@ type Bundle struct {
 	Icon         string                             `json:"icon" yaml:"icon" validate:"required"`
 	Version      manifest_entities.Version          `json:"version" yaml:"version" validate:"required,version"`
 	Author       string                             `json:"author" yaml:"author" validate:"required"`
-	Type         manifest_entities.DifyManifestType `json:"type" yaml:"type" validate:"required,eq=bundle"`
+	Type         manifest_entities.MlchainManifestType `json:"type" yaml:"type" validate:"required,eq=bundle"`
 	Dependencies []Dependency                       `json:"dependencies" yaml:"dependencies" validate:"required"`
 	Tags         []manifest_entities.PluginTag      `json:"tags" yaml:"tags" validate:"omitempty,dive,plugin_tag,max=128"`
 }

@@ -1,8 +1,8 @@
 package manifest_entities
 
-type DifyManifestType string
+type MlchainManifestType string
 
 const (
-	PluginType DifyManifestType = "plugin"
-	BundleType DifyManifestType = "bundle"
+	PluginType MlchainManifestType = "plugin"
+	BundleType MlchainManifestType = "bundle"
 )

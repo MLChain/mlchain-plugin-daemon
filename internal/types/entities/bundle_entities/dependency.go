@@ -210,13 +210,13 @@ func init() {
 
 type GithubDependency struct {
 	// RepoPattern is the pattern of the repo, as for its content, at least one of the following patterns:
-	// 1. owner/repo/1.0.0/aaa.difypkg
-	// 2. owner/repo/1.0.0/*.difypkg
-	// 3. owner/repo/1.x.x/aaa.difypkg
-	// 4. owner/repo/^1.0.0/aaa.difypkg
-	// 5. owner/repo/~1.0.0/aaa.difypkg
-	// 6. owner/repo/1.0.0-2.0.0/aaa.difypkg
-	// 7. owner/repo/1.0.0-beta/aaa.difypkg
+	// 1. owner/repo/1.0.0/aaa.mlchainpkg
+	// 2. owner/repo/1.0.0/*.mlchainpkg
+	// 3. owner/repo/1.x.x/aaa.mlchainpkg
+	// 4. owner/repo/^1.0.0/aaa.mlchainpkg
+	// 5. owner/repo/~1.0.0/aaa.mlchainpkg
+	// 6. owner/repo/1.0.0-2.0.0/aaa.mlchainpkg
+	// 7. owner/repo/1.0.0-beta/aaa.mlchainpkg
 	RepoPattern GithubRepoPattern `json:"repo_pattern" yaml:"repo_pattern" validate:"required,github_dependency_pattern"`
 }
 
@@ -232,6 +232,6 @@ type MarketplaceDependency struct {
 }
 
 type PackageDependency struct {
-	// refers to the path of difypkg file in assets
+	// refers to the path of mlchainpkg file in assets
 	Path string `json:"path" yaml:"path" validate:"required"`
 }

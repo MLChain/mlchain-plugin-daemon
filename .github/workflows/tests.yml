@@ -22,14 +22,14 @@ jobs:
         image: redis
         ports:
           - 6379:6379
-        options: -e REDIS_PASSWORD=difyai123456
+        options: -e REDIS_PASSWORD=mlchainai123456
 
       postgres:
         image: postgres
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: difyai123456
-          POSTGRES_DB: difyai
+          POSTGRES_PASSWORD: mlchainai123456
+          POSTGRES_DB: mlchainai
         ports:
           - 5432:5432
 

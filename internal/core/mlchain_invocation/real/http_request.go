@@ -17,13 +17,13 @@ import (
 func Request[T any](i *RealBackwardsInvocation, method string, path string, options ...http_requests.HttpOptions) (*T, error) {
 	options = append(options,
 		http_requests.HttpHeader(map[string]string{
-			"X-Inner-Api-Key": i.difyInnerApiKey,
+			"X-Inner-Api-Key": i.mlchainInnerApiKey,
 		}),
 		http_requests.HttpWriteTimeout(5000),
 		http_requests.HttpReadTimeout(240000),
 	)
 
-	req, err := http_requests.RequestAndParse[BaseBackwardsInvocationResponse[T]](i.client, i.difyPath(path), method, options...)
+	req, err := http_requests.RequestAndParse[BaseBackwardsInvocationResponse[T]](i.client, i.mlchainPath(path), method, options...)
 	if err != nil {
 		return nil, err
 	}
@@ -53,13 +53,13 @@ func StreamResponse[T any](i *RealBackwardsInvocation, method string, path strin
 ) {
 	options = append(
 		options, http_requests.HttpHeader(map[string]string{
-			"X-Inner-Api-Key": i.difyInnerApiKey,
+			"X-Inner-Api-Key": i.mlchainInnerApiKey,
 		}),
 		http_requests.HttpWriteTimeout(5000),
 		http_requests.HttpReadTimeout(240000),
 	)
 
-	response, err := http_requests.RequestAndParseStream[BaseBackwardsInvocationResponse[T]](i.client, i.difyPath(path), method, options...)
+	response, err := http_requests.RequestAndParseStream[BaseBackwardsInvocationResponse[T]](i.client, i.mlchainPath(path), method, options...)
 	if err != nil {
 		return nil, err
 	}
